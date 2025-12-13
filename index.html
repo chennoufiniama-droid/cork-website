@@ -4,260 +4,8 @@
   <meta charset="UTF-8" />
   <title>CORK Rehab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <style>
-    :root{
-      --bg: #fbf7ee;        /* warm beige */
-      --card: #fffdf8;
-      --text: #1b1b1b;
-      --muted: #5c5c5c;
-      --green: #2f6b4f;     /* deep green */
-      --green2: #3f8a66;    /* lighter green */
-      --border: rgba(0,0,0,0.10);
-      --shadow: 0 12px 30px rgba(0,0,0,0.10);
-      --radius: 18px;
-    }
-
-    * { box-sizing: border-box; }
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: radial-gradient(900px 500px at 20% 0%, rgba(63,138,102,0.18), transparent 55%),
-                  radial-gradient(900px 500px at 80% 10%, rgba(47,107,79,0.12), transparent 55%),
-                  var(--bg);
-      line-height: 1.6;
-    }
-
-    a { color: inherit; text-decoration: none; }
-    .container{ max-width: 1050px; margin: 0 auto; padding: 0 18px; }
-
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid var(--border);
-      background: rgba(251,247,238,0.75);
-      backdrop-filter: blur(10px);
-    }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 14px 0;
-      gap: 12px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-    }
-
-    .logoDot{
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      box-shadow: 0 6px 16px rgba(47,107,79,0.35);
-    }
-
-    nav{
-      display:flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      font-size: 14px;
-      color: rgba(0,0,0,0.75);
-    }
-    nav a{
-      padding: 8px 10px;
-      border-radius: 999px;
-    }
-    nav a:hover{
-      background: rgba(47,107,79,0.10);
-      color: rgba(0,0,0,0.95);
-    }
-
-    .hero{
-      padding: 44px 0 10px;
-    }
-
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .heroCard{
-      border: 1px solid var(--border);
-      background: rgba(255,253,248,0.72);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 26px;
-    }
-
-    h1{
-      margin: 0;
-      font-size: clamp(30px, 3.8vw, 46px);
-      line-height: 1.15;
-      letter-spacing: -0.6px;
-    }
-    .sub{
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 60ch;
-    }
-
-    .pillRow{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-    .pill{
-      font-size: 12px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.55);
-    }
-
-    .ctaRow{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-
-    .btn{
-      border: 0;
-      padding: 12px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 14px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 8px;
-    }
-    .btnPrimary{
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      color: white;
-      box-shadow: 0 14px 25px rgba(47,107,79,0.28);
-    }
-    .btnPrimary:hover{ filter: brightness(1.02); transform: translateY(-1px); }
-    .btnGhost{
-      background: rgba(255,255,255,0.55);
-      border: 1px solid var(--border);
-    }
-    .btnGhost:hover{ background: rgba(255,255,255,0.75); }
-
-    .rightCardTitle{ font-weight: 800; margin: 0 0 10px; }
-    .list{ margin: 0; padding-left: 18px; color: rgba(0,0,0,0.78); }
-    .list li{ margin: 6px 0; }
-
-    .miniGrid{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .mini{
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.55);
-      font-size: 13px;
-      color: rgba(0,0,0,0.75);
-    }
-
-    section{ padding: 34px 0; }
-    .sectionTitle{
-      font-size: 24px;
-      margin: 0 0 8px;
-      letter-spacing: -0.2px;
-    }
-    .sectionDesc{ margin: 0 0 18px; color: var(--muted); }
-
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .card{
-      border: 1px solid var(--border);
-      background: rgba(255,253,248,0.72);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.07);
-      overflow: hidden;
-    }
-    .cardBody{ padding: 16px; }
-    .cardTitle{ margin: 0 0 6px; font-weight: 800; }
-    .cardText{ margin: 0; color: rgba(0,0,0,0.72); font-size: 14px; }
-
-    .imgBox{
-      width: 100%;
-      height: 180px;
-      background: linear-gradient(135deg, rgba(47,107,79,0.18), rgba(251,247,238,0.0));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-bottom: 1px solid var(--border);
-    }
-    .imgBox img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display:block;
-    }
-    .imgHint{
-      font-size: 12px;
-      color: rgba(0,0,0,0.55);
-      padding: 0 14px;
-      text-align:center;
-    }
-
-    .darkBand{
-      border: 1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(135deg, #204b37, #2f6b4f);
-      color: white;
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: 0 16px 30px rgba(0,0,0,0.16);
-    }
-    .darkBand p{ margin: 8px 0 0; color: rgba(255,255,255,0.82); }
-
-    .form{
-      max-width: 560px;
-      display:grid;
-      gap: 10px;
-    }
-    input, textarea{
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.65);
-      font-size: 14px;
-      outline: none;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(47,107,79,0.55);
-      box-shadow: 0 0 0 4px rgba(47,107,79,0.12);
-    }
-
-    footer{
-      padding: 26px 0 40px;
-      border-top: 1px solid var(--border);
-      color: rgba(0,0,0,0.60);
-      font-size: 14px;
-    }
-
-    /* Mobile */
-    @media (max-width: 900px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .grid3{ grid-template-columns: 1fr; }
-      .imgBox{ height: 220px; }
-    }
-    /* Fun modern touches */
+<style>
+ /* Fun modern touches */
 .heroCard { position: relative; overflow: hidden; }
 .heroCard::before{
   content:"";
@@ -328,8 +76,7 @@ footer { margin-top: 10px; }
 .footerSocial a:hover{
   background: rgba(47,107,79,0.12);
 }
-
-  </style>
+</style>
 </head>
 
 <body>
@@ -362,7 +109,7 @@ footer { margin-top: 10px; }
     <section class="hero">
       <div class="heroGrid">
         <div class="heroCard">
-         <h1>Rehabilitation tools made with cork—warm, safe, and sustainable.</h1>
+         <h1>Rehabilitation tools made with cork warm, safe, and sustainable.</h1>
           <p class="sub">
             Designed for physiotherapy clinics and healthcare centers that want a better patient experience
             and a lower environmental footprint.
@@ -508,4 +255,5 @@ footer { margin-top: 10px; }
   </script>
 </body>
 </html>
+
 
