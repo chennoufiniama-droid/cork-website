@@ -1,666 +1,279 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>CORK Rehab</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>CORK Rehab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    :root{
-      --bg: #fbf7ee;        /* warm beige */
-      --card: #fffdf8;
-      --text: #1b1b1b;
-      --muted: #5c5c5c;
-      --green: #2f6b4f;     /* deep green */
-      --green2: #3f8a66;    /* lighter green */
-      --border: rgba(0,0,0,0.10);
-      --shadow: 0 12px 30px rgba(0,0,0,0.10);
-      --radius: 18px;
-    }
+<style>
+:root{
+  --bg:#fbf7ee;
+  --text:#1b1b1b;
+  --muted:#5c5c5c;
+  --green:#2f6b4f;
+  --green2:#3f8a66;
+  --border:rgba(0,0,0,.1);
+  --shadow:0 12px 30px rgba(0,0,0,.1);
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,Arial,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(900px 500px at 20% 0%, rgba(63,138,102,.18), transparent 55%),
+    radial-gradient(900px 500px at 80% 10%, rgba(47,107,79,.12), transparent 55%),
+    var(--bg);
+}
+a{text-decoration:none;color:inherit}
+.container{max-width:1100px;margin:auto;padding:0 18px}
 
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+/* CONTACT BAR */
+.contactBar{border-bottom:1px solid var(--border);background:rgba(255,255,255,.45)}
+.contactBarInner{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:10px;padding:8px 0;font-size:13px
+}
+.contactItems{display:flex;gap:10px;flex-wrap:wrap}
+.contactItem{
+  padding:6px 10px;border-radius:999px;
+  background:rgba(255,255,255,.6);
+  border:1px solid var(--border)
+}
+.langSelect{
+  padding:6px 10px;border-radius:999px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.7);
+  font-weight:700
+}
 
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: radial-gradient(900px 500px at 20% 0%, rgba(63,138,102,0.18), transparent 55%),
-                  radial-gradient(900px 500px at 80% 10%, rgba(47,107,79,0.12), transparent 55%),
-                  var(--bg);
-      line-height: 1.6;
-    }
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(251,247,238,.8);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(10px)
+}
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+.brand{font-weight:800;display:flex;gap:8px;align-items:center}
+.logoDot{width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green2))}
+nav{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+nav a{padding:8px 12px;border-radius:999px;font-size:14px}
+nav a:hover{background:rgba(47,107,79,.1)}
+.social{border:1px solid var(--border);background:rgba(255,255,255,.6);font-weight:800}
+.navDivider{width:1px;height:18px;background:#999}
 
-    a { color: inherit; text-decoration: none; }
-    .container{ max-width: 1050px; margin: 0 auto; padding: 0 18px; }
+/* HERO */
+.hero{padding:50px 0}
+.heroGrid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+.heroCard{
+  background:rgba(255,253,248,.75);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:26px;
+  position:relative;
+  overflow:hidden
+}
+.heroCard::before{
+  content:"";
+  position:absolute;
+  top:-120px;right:-120px;
+  width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(63,138,102,.3),transparent 60%)
+}
+h1{margin:0;font-size:clamp(32px,4vw,46px)}
+.sub{color:var(--muted);margin-top:12px}
+.pillRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.pill{font-size:12px;padding:6px 10px;border-radius:999px;background:#fff;border:1px solid var(--border)}
+.ctaRow{display:flex;gap:10px;margin-top:18px}
 
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid var(--border);
-      background: rgba(251,247,238,0.75);
-      backdrop-filter: blur(10px);
-    }
+/* BUTTONS */
+.btn{
+  padding:12px 16px;border-radius:12px;border:none;
+  font-weight:700;cursor:pointer
+}
+.btnPrimary{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff}
+.btnGhost{background:#fff;border:1px solid var(--border)}
 
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 14px 0;
-      gap: 12px;
-    }
+/* SECTIONS */
+section{padding:40px 0}
+.sectionTitle{font-size:26px}
+.sectionDesc{color:var(--muted);margin-bottom:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{
+  background:rgba(255,253,248,.75);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden
+}
+.cardBody{padding:16px}
+.imgBox{height:180px;background:#ddd}
+.imgBox img{width:100%;height:100%;object-fit:cover}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: 0.2px;
-    }
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:30px 0;color:#666}
+.footerRow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
-    .logoDot{
-      width: 14px;
-      height: 14px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      box-shadow: 0 6px 16px rgba(47,107,79,0.35);
-    }
+/* MODAL */
+.modalOverlay{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.4);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999
+}
+.modal{
+  background:rgba(255,253,248,.95);
+  padding:20px;
+  border-radius:18px;
+  width:100%;
+  max-width:420px
+}
+.modal input{
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:12px;
+  border:1px solid var(--border)
+}
 
-    nav{
-      display:flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      font-size: 14px;
-      color: rgba(0,0,0,0.75);
-      align-items: center;
-    }
-    nav a{
-      padding: 8px 10px;
-      border-radius: 999px;
-    }
-    nav a:hover{
-      background: rgba(47,107,79,0.10);
-      color: rgba(0,0,0,0.95);
-    }
-
-    .navDivider{
-      width: 1px;
-      height: 18px;
-      background: rgba(0,0,0,0.18);
-      display: inline-block;
-      margin: 0 6px;
-      align-self: center;
-    }
-
-    .social{
-      font-weight: 800;
-      letter-spacing: -0.2px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: rgba(255,255,255,0.55);
-      transition: transform .15s ease, background .15s ease;
-    }
-    .social:hover{
-      background: rgba(47,107,79,0.12);
-      transform: translateY(-1px);
-    }
-
-    .hero{
-      padding: 44px 0 10px;
-    }
-
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 22px;
-      align-items: stretch;
-    }
-
-    .heroCard{
-      border: 1px solid var(--border);
-      background: rgba(255,253,248,0.72);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 26px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Fun blobs */
-    .heroCard::before{
-      content:"";
-      position:absolute;
-      inset:-120px -120px auto auto;
-      width: 220px;
-      height: 220px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, rgba(63,138,102,0.28), transparent 60%);
-      transform: rotate(12deg);
-      pointer-events: none;
-    }
-    .heroCard::after{
-      content:"";
-      position:absolute;
-      inset:auto auto -140px -140px;
-      width: 260px;
-      height: 260px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 40% 40%, rgba(47,107,79,0.22), transparent 62%);
-      pointer-events: none;
-    }
-
-    h1{
-      margin: 0;
-      font-size: clamp(30px, 3.8vw, 46px);
-      line-height: 1.15;
-      letter-spacing: -0.6px;
-    }
-    .sub{
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 16px;
-      max-width: 60ch;
-    }
-
-    .pillRow{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-    .pill{
-      font-size: 12px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.55);
-    }
-
-    .ctaRow{ display:flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
-
-    .btn{
-      border: 0;
-      padding: 12px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 14px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 8px;
-      transition: transform 0.15s ease, filter 0.15s ease;
-    }
-    .btnPrimary{
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      color: white;
-      box-shadow: 0 14px 25px rgba(47,107,79,0.28);
-    }
-    .btnPrimary:hover{ filter: brightness(1.02); transform: translateY(-1px); }
-    .btnGhost{
-      background: rgba(255,255,255,0.55);
-      border: 1px solid var(--border);
-    }
-    .btnGhost:hover{ background: rgba(255,255,255,0.75); transform: translateY(-1px); }
-
-    .rightCardTitle{ font-weight: 800; margin: 0 0 10px; }
-    .list{ margin: 0; padding-left: 18px; color: rgba(0,0,0,0.78); }
-    .list li{ margin: 6px 0; }
-
-    .miniGrid{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .mini{
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.55);
-      font-size: 13px;
-      color: rgba(0,0,0,0.75);
-    }
-
-    section{ padding: 34px 0; }
-
-    /* Scroll-in animation (more life) */
-    .reveal{
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
-    }
-    .reveal.show{
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .sectionTitle{
-      font-size: 24px;
-      margin: 0 0 8px;
-      letter-spacing: -0.2px;
-    }
-    .sectionDesc{ margin: 0 0 18px; color: var(--muted); }
-
-    .grid3{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-
-    .card{
-      border: 1px solid var(--border);
-      background: rgba(255,253,248,0.72);
-      border-radius: var(--radius);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.07);
-      overflow: hidden;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-    .card:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px rgba(0,0,0,0.12);
-    }
-    .cardBody{ padding: 16px; }
-    .cardTitle{ margin: 0 0 6px; font-weight: 800; }
-    .cardText{ margin: 0; color: rgba(0,0,0,0.72); font-size: 14px; }
-
-    .imgBox{
-      width: 100%;
-      height: 180px;
-      background: linear-gradient(135deg, rgba(47,107,79,0.18), rgba(251,247,238,0.0));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-bottom: 1px solid var(--border);
-    }
-    .imgBox img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display:block;
-    }
-    .imgHint{
-      font-size: 12px;
-      color: rgba(0,0,0,0.55);
-      padding: 0 14px;
-      text-align:center;
-    }
-
-    .darkBand{
-      border: 1px solid rgba(255,255,255,0.12);
-      background: linear-gradient(135deg, #204b37, #2f6b4f);
-      color: white;
-      border-radius: 22px;
-      padding: 22px;
-      box-shadow: 0 16px 30px rgba(0,0,0,0.16);
-    }
-    .darkBand p{ margin: 8px 0 0; color: rgba(255,255,255,0.82); }
-
-    .form{
-      max-width: 560px;
-      display:grid;
-      gap: 10px;
-    }
-    input, textarea{
-      width: 100%;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.65);
-      font-size: 14px;
-      outline: none;
-    }
-    input:focus, textarea:focus{
-      border-color: rgba(47,107,79,0.55);
-      box-shadow: 0 0 0 4px rgba(47,107,79,0.12);
-    }
-
-    footer{
-      padding: 26px 0 40px;
-      border-top: 1px solid var(--border);
-      color: rgba(0,0,0,0.60);
-      font-size: 14px;
-      margin-top: 10px;
-    }
-    .footerRow{
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap: wrap;
-    }
-    .footerSocial{
-      display:flex;
-      gap: 12px;
-    }
-    .footerSocial a{
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.10);
-      background: rgba(255,255,255,0.55);
-    }
-    .footerSocial a:hover{
-      background: rgba(47,107,79,0.12);
-    }
-
-    /* Modal */
-    .modalOverlay{
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.35);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding: 18px;
-      z-index: 999;
-    }
-    .modal{
-      width: min(520px, 100%);
-      background: rgba(255,253,248,0.92);
-      border: 1px solid rgba(0,0,0,0.12);
-      border-radius: 18px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-      padding: 16px;
-      position: relative;
-      backdrop-filter: blur(10px);
-    }
-    .modalClose{
-      position:absolute;
-      top: 10px;
-      right: 10px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: rgba(255,255,255,0.65);
-      border-radius: 12px;
-      padding: 6px 10px;
-      cursor:pointer;
-    }
-    .tabs{
-      display:flex;
-      gap: 8px;
-      margin-bottom: 12px;
-    }
-    .tabBtn{
-      flex:1;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: rgba(255,255,255,0.55);
-      padding: 10px;
-      font-weight: 800;
-      cursor:pointer;
-    }
-    .tabBtn.active{
-      background: linear-gradient(135deg, var(--green), var(--green2));
-      color: white;
-      border-color: transparent;
-    }
-    .modalTitle{ margin: 6px 0 4px; }
-    .modalText{ margin: 0 0 12px; color: rgba(0,0,0,0.65); font-size: 14px; }
-    .modalInput{
-      width: 100%;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(0,0,0,0.12);
-      background: rgba(255,255,255,0.70);
-      margin-bottom: 10px;
-    }
-    .modalSmall{ margin: 10px 0 0; font-size: 12px; color: rgba(0,0,0,0.55); }
-
-    /* Mobile */
-    @media (max-width: 900px){
-      .heroGrid{ grid-template-columns: 1fr; }
-      .grid3{ grid-template-columns: 1fr; }
-      .imgBox{ height: 220px; }
-    }
-  </style>
+@media(max-width:900px){
+  .heroGrid,.grid3{grid-template-columns:1fr}
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="container">
-      <div class="topbar">
-        <div class="brand"><span class="logoDot"></span> CORK Rehab</div>
 
-        <nav>
-          <a href="#products">Products</a>
-          <a href="#why">Why Cork</a>
-          <a href="#clinics">For Clinics</a>
-          <a href="#contact">Contact</a>
+<!-- CONTACT BAR -->
+<div class="contactBar">
+  <div class="container contactBarInner">
+    <div class="contactItems">
+      <div class="contactItem">📧 <a href="mailto:CorkRehab@gmail.com">CorkRehab@gmail.com</a></div>
+      <div class="contactItem">📞 +212 6 00 00 00 00</div>
+      <div class="contactItem" data-i18n="location">Casablanca, Morocco</div>
+    </div>
+    <select class="langSelect" id="langSelect">
+      <option value="en">EN</option>
+      <option value="fr">FR</option>
+      <option value="es">ES</option>
+      <option value="it">IT</option>
+    </select>
+  </div>
+</div>
 
-          <span class="navDivider"></span>
+<header>
+  <div class="container topbar">
+    <div class="brand"><span class="logoDot"></span> CORK Rehab</div>
+    <nav>
+      <a href="#products" data-i18n="navProducts">Products</a>
+      <a href="#why" data-i18n="navWhy">Why Cork</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+      <span class="navDivider"></span>
+      <a class="social" href="#" id="openLogin">Login</a>
+      <a class="social" href="#" id="openSignup">Sign up</a>
+    </nav>
+  </div>
+</header>
 
-          <a class="social" href="https://instagram.com/CorkRehab" target="_blank" rel="noopener">IG</a>
-          <a class="social" href="https://linkedin.com/company/CorkRehab" target="_blank" rel="noopener">in</a>
+<main class="container">
 
-          <a class="social" href="#" id="openLogin">Login</a>
-          <a class="social" href="#" id="openSignup">Sign up</a>
-        </nav>
+<section class="hero">
+  <div class="heroGrid">
+    <div class="heroCard">
+      <h1 data-i18n="heroTitle">Rehabilitation tools made with cork—warm, safe, and sustainable.</h1>
+      <p class="sub" data-i18n="heroSub">Designed for physiotherapy clinics and healthcare centers.</p>
+      <div class="pillRow">
+        <div class="pill">Non-slip</div>
+        <div class="pill">Warm touch</div>
+        <div class="pill">Eco-friendly</div>
+      </div>
+      <div class="ctaRow">
+        <a class="btn btnPrimary" href="#contact" data-i18n="ctaQuote">Request a quote</a>
+        <a class="btn btnGhost" href="#products" data-i18n="ctaProducts">See products</a>
       </div>
     </div>
-  </header>
 
-  <main class="container">
-    <!-- HERO -->
-    <section class="hero reveal">
-      <div class="heroGrid">
-        <div class="heroCard">
-          <h1>Rehabilitation tools made with cork—warm, safe, and sustainable.</h1>
-          <p class="sub">
-            Designed for physiotherapy clinics and healthcare centers that want a better patient experience
-            and a lower environmental footprint.
-          </p>
-
-          <div class="pillRow">
-            <div class="pill">Non-slip feel</div>
-            <div class="pill">Warm-to-touch comfort</div>
-            <div class="pill">Clinic-ready materials</div>
-            <div class="pill">Sustainability-first</div>
-          </div>
-
-          <div class="ctaRow">
-            <a class="btn btnPrimary" href="#contact">Request a quote</a>
-            <a class="btn btnGhost" href="#products">See products</a>
-          </div>
-        </div>
-
-        <div class="heroCard">
-          <p class="rightCardTitle">What we provide (B2B)</p>
-          <ul class="list">
-            <li>Cork-coated rehab equipment (strong core + cork comfort layer)</li>
-            <li>Fully cork items where feasible (after mechanical testing)</li>
-            <li>Training, onboarding, and after-sales support</li>
-          </ul>
-
-          <div class="miniGrid">
-            <div class="mini">Comfort-first design</div>
-            <div class="mini">Sustainable materials</div>
-            <div class="mini">Hygiene-focused</div>
-            <div class="mini">Testing roadmap</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PRODUCTS -->
-    <section id="products" class="reveal">
-      <h2 class="sectionTitle">Products</h2>
-      <p class="sectionDesc">
-        Rehab tools redesigned using cork (or cork coatings) for improved grip, warmth, and a premium natural feel.
-      </p>
-
-      <div class="grid3">
-        <div class="card">
-          <div class="imgBox">
-            <img src="images/cork-1-balance-board.jpg" alt="Cork balance board"
-              onerror="this.remove(); this.parentElement.innerHTML='<div class=imgHint>Put an image in <b>images/cork-1-balance-board.jpg</b></div>';">
-          </div>
-          <div class="cardBody">
-            <p class="cardTitle">Balance boards</p>
-            <p class="cardText">Non-slip surface, warm touch, durable cork coating.</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="imgBox">
-            <img src="images/cork-2-medicine-ball.jpg" alt="Cork medicine ball"
-              onerror="this.remove(); this.parentElement.innerHTML='<div class=imgHint>Put an image in <b>images/cork-2-medicine-ball.jpg</b></div>';">
-          </div>
-          <div class="cardBody">
-            <p class="cardTitle">Medicine balls</p>
-            <p class="cardText">Comfortable grip and a less “cold” material experience.</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="imgBox">
-            <img src="images/cork-3-dumbbell.jpg" alt="Cork dumbbell"
-              onerror="this.remove(); this.parentElement.innerHTML='<div class=imgHint>Put an image in <b>images/cork-3-dumbbell.jpg</b></div>';">
-          </div>
-          <div class="cardBody">
-            <p class="cardTitle">Dumbbells & handles</p>
-            <p class="cardText">Cork-coated grip for comfort + control during rehab exercises.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section id="why" class="reveal">
-      <h2 class="sectionTitle">Why cork?</h2>
-      <p class="sectionDesc">Eco-friendly doesn’t have to look “basic”. Cork can feel premium and clinical-ready.</p>
-
-      <div class="grid3">
-        <div class="card"><div class="cardBody">
-          <p class="cardTitle">Better patient experience</p>
-          <p class="cardText">Warmer and more pleasant than plastic/metal, with a naturally confident grip.</p>
-        </div></div>
-
-        <div class="card"><div class="cardBody">
-          <p class="cardTitle">Sustainability</p>
-          <p class="cardText">Renewable, recyclable, and aligned with responsible production goals.</p>
-        </div></div>
-
-        <div class="card"><div class="cardBody">
-          <p class="cardTitle">Trust & adoption</p>
-          <p class="cardText">Support clinics with pilots, testing plans, and transparent claims.</p>
-        </div></div>
-      </div>
-    </section>
-
-    <!-- B2B BAND -->
-    <section id="clinics" class="reveal">
-      <div class="darkBand">
-        <h2 class="sectionTitle" style="margin:0;">Built for clinics & rehab centers</h2>
-        <p>Start with private clinics: faster pilots, real feedback, and co-design with physiotherapists.</p>
-        <div class="pillRow" style="margin-top:14px;">
-          <div class="pill" style="background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.18); color: white;">Pilot program (4–8 weeks)</div>
-          <div class="pill" style="background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.18); color: white;">Co-design</div>
-          <div class="pill" style="background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.18); color: white;">Training + onboarding</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="reveal">
-      <h2 class="sectionTitle">Contact</h2>
-      <p class="sectionDesc">Want a quote, demo, or pilot? Leave a message.</p>
-
-      <form class="form" action="https://formspree.io/f/xjknlpnw" method="POST">
-        <input name="clinic" placeholder="Clinic name" required />
-        <input type="email" name="email" placeholder="Email" required />
-        <textarea name="message" rows="5" placeholder="What tools are you interested in?" required></textarea>
-        <button class="btn btnPrimary" type="submit">Send</button>
-      </form>
-    </section>
-
-    <footer>
-      <div class="footerRow">
-        <div>© <span id="year"></span> CORK Rehab — Green innovation for rehab equipment.</div>
-        <div class="footerSocial">
-          <a href="https://instagram.com/CorkRehab" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://linkedin.com/company/CorkRehab" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="mailto:CorkRehab@gmail.com">Email</a>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <!-- LOGIN / SIGNUP MODAL (UI ONLY) -->
-  <div class="modalOverlay" id="modalOverlay" style="display:none;">
-    <div class="modal">
-      <button class="modalClose" id="closeModal" aria-label="Close">✕</button>
-
-      <div class="tabs">
-        <button class="tabBtn active" id="tabLogin" type="button">Login</button>
-        <button class="tabBtn" id="tabSignup" type="button">Sign up</button>
-      </div>
-
-      <div id="loginPanel">
-        <h3 class="modalTitle">Welcome back</h3>
-        <p class="modalText">Demo login (UI only). Real accounts can be added later (Firebase/Supabase).</p>
-        <input class="modalInput" type="email" placeholder="Email" />
-        <input class="modalInput" type="password" placeholder="Password" />
-        <button class="btn btnPrimary" style="width:100%;" type="button">Login</button>
-        <p class="modalSmall">Forgot password? (coming soon)</p>
-      </div>
-
-      <div id="signupPanel" style="display:none;">
-        <h3 class="modalTitle">Create account</h3>
-        <p class="modalText">Demo sign up (UI only). Real accounts can be added later.</p>
-        <input class="modalInput" placeholder="Clinic name" />
-        <input class="modalInput" type="email" placeholder="Email" />
-        <input class="modalInput" type="password" placeholder="Password" />
-        <button class="btn btnPrimary" style="width:100%;" type="button">Sign up</button>
-        <p class="modalSmall">By continuing you agree to basic terms.</p>
-      </div>
+    <div class="heroCard">
+      <strong>What we provide (B2B)</strong>
+      <ul>
+        <li>Cork-coated rehab equipment</li>
+        <li>Clinic pilots & testing</li>
+        <li>Training & support</li>
+      </ul>
     </div>
   </div>
+</section>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+<section id="products">
+  <h2 class="sectionTitle" data-i18n="productsTitle">Products</h2>
+  <div class="grid3">
+    <div class="card"><div class="imgBox"><img src="images/cork-1-balance-board.jpg"></div><div class="cardBody">Balance Board</div></div>
+    <div class="card"><div class="imgBox"><img src="images/cork-2-medicine-ball.jpg"></div><div class="cardBody">Medicine Ball</div></div>
+    <div class="card"><div class="imgBox"><img src="images/cork-3-dumbbell.jpg"></div><div class="cardBody">Dumbbell</div></div>
+  </div>
+</section>
 
-    // Login/Signup modal
-    const overlay = document.getElementById("modalOverlay");
-    const openLogin = document.getElementById("openLogin");
-    const openSignup = document.getElementById("openSignup");
-    const closeModal = document.getElementById("closeModal");
+<section id="contact">
+  <h2 class="sectionTitle" data-i18n="contactTitle">Contact</h2>
+  <form action="https://formspree.io/f/xjknlpnw" method="POST">
+    <input placeholder="Clinic name" required>
+    <input type="email" placeholder="Email" required>
+    <textarea placeholder="Message" required></textarea>
+    <button class="btn btnPrimary">Send</button>
+  </form>
+</section>
 
-    const tabLogin = document.getElementById("tabLogin");
-    const tabSignup = document.getElementById("tabSignup");
-    const loginPanel = document.getElementById("loginPanel");
-    const signupPanel = document.getElementById("signupPanel");
+<footer>
+  <div class="footerRow">
+    <div>© <span id="year"></span> CORK Rehab</div>
+    <div>
+      <a href="https://instagram.com/CorkRehab">Instagram</a> ·
+      <a href="https://linkedin.com/company/CorkRehab">LinkedIn</a>
+    </div>
+  </div>
+</footer>
 
-    function showLogin(){
-      overlay.style.display = "flex";
-      tabLogin.classList.add("active");
-      tabSignup.classList.remove("active");
-      loginPanel.style.display = "block";
-      signupPanel.style.display = "none";
-    }
+</main>
 
-    function showSignup(){
-      overlay.style.display = "flex";
-      tabSignup.classList.add("active");
-      tabLogin.classList.remove("active");
-      signupPanel.style.display = "block";
-      loginPanel.style.display = "none";
-    }
+<!-- LOGIN MODAL -->
+<div class="modalOverlay" id="modal">
+  <div class="modal">
+    <h3>Login / Sign up</h3>
+    <input placeholder="Email">
+    <input type="password" placeholder="Password">
+    <button class="btn btnPrimary">Continue</button>
+  </div>
+</div>
 
-    openLogin?.addEventListener("click", (e) => { e.preventDefault(); showLogin(); });
-    openSignup?.addEventListener("click", (e) => { e.preventDefault(); showSignup(); });
+<script>
+document.getElementById("year").textContent=new Date().getFullYear();
 
-    tabLogin.addEventListener("click", showLogin);
-    tabSignup.addEventListener("click", showSignup);
+const modal=document.getElementById("modal");
+document.getElementById("openLogin").onclick=e=>{e.preventDefault();modal.style.display="flex";}
+document.getElementById("openSignup").onclick=e=>{e.preventDefault();modal.style.display="flex";}
+modal.onclick=e=>{if(e.target===modal)modal.style.display="none";}
 
-    closeModal.addEventListener("click", () => overlay.style.display = "none");
-    overlay.addEventListener("click", (e) => { if(e.target === overlay) overlay.style.display = "none"; });
+const t={
+en:{heroTitle:"Rehabilitation tools made with cork—warm, safe, and sustainable.",heroSub:"Designed for physiotherapy clinics and healthcare centers.",productsTitle:"Products",contactTitle:"Contact",navProducts:"Products",navWhy:"Why Cork",navContact:"Contact",ctaQuote:"Request a quote",ctaProducts:"See products",location:"Casablanca, Morocco"},
+fr:{heroTitle:"Outils de rééducation en liège—chauds, sûrs et durables.",heroSub:"Conçu pour les cliniques de kinésithérapie.",productsTitle:"Produits",contactTitle:"Contact",navProducts:"Produits",navWhy:"Pourquoi le liège",navContact:"Contact",ctaQuote:"Demander un devis",ctaProducts:"Voir les produits",location:"Casablanca, Maroc"},
+es:{heroTitle:"Herramientas de rehabilitación de corcho—cálidas y sostenibles.",heroSub:"Diseñado para clínicas de fisioterapia.",productsTitle:"Productos",contactTitle:"Contacto",navProducts:"Productos",navWhy:"Por qué corcho",navContact:"Contacto",ctaQuote:"Solicitar presupuesto",ctaProducts:"Ver productos",location:"Casablanca, Marruecos"},
+it:{heroTitle:"Strumenti di riabilitazione in sughero—caldi e sostenibili.",heroSub:"Progettato per cliniche di fisioterapia.",productsTitle:"Prodotti",contactTitle:"Contatto",navProducts:"Prodotti",navWhy:"Perché il sughero",navContact:"Contatto",ctaQuote:"Richiedi preventivo",ctaProducts:"Vedi prodotti",location:"Casablanca, Marocco"}
+};
 
-    // Reveal animations on scroll
-    const reveals = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add("show");
-      });
-    }, { threshold: 0.12 });
+const sel=document.getElementById("langSelect");
+function apply(l){
+  document.querySelectorAll("[data-i18n]").forEach(e=>{
+    const k=e.dataset.i18n;
+    if(t[l]&&t[l][k])e.textContent=t[l][k];
+  });
+}
+sel.onchange=()=>apply(sel.value);
+apply("en");
+</script>
 
-    reveals.forEach(el => io.observe(el));
-  </script>
 </body>
 </html>
