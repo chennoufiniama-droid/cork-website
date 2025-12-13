@@ -17,10 +17,10 @@
       --shadow: 0 12px 30px rgba(0,0,0,0.10);
       --radius: 18px;
 
-      /* NEW extra accent colors (keeps green/beige as main theme) */
-      --accent: #6c4cff;    /* purple pop */
-      --accent2: #ff6b6b;   /* coral pop */
-      --accent3: #2bb3a3;   /* teal pop */
+      /* extra accents (still green/beige main) */
+      --accent: #6c4cff;    /* purple */
+      --accent2: #ff6b6b;   /* coral */
+      --accent3: #2bb3a3;   /* teal */
     }
 
     * { box-sizing: border-box; }
@@ -39,7 +39,7 @@
     a { color: inherit; text-decoration: none; }
     .container{ max-width: 1050px; margin: 0 auto; padding: 0 18px; }
 
-    /* NEW: Top contact bar + language switch */
+    /* Top contact bar + language switch */
     .contactBar{
       border-bottom: 1px solid var(--border);
       background: rgba(255,255,255,0.45);
@@ -176,7 +176,7 @@
       overflow: hidden;
     }
 
-    /* Fun modern blob shapes (keeps your original look) */
+    /* Fun modern blob shapes */
     .heroCard::before{
       content:"";
       position:absolute;
@@ -214,7 +214,7 @@
 
     .pillRow{ display:flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 
-    /* UPDATED: pills have subtle multi-color glow (still beige/green overall) */
+    /* pills with subtle multi-color glow */
     .pill{
       font-size: 12px;
       padding: 7px 10px;
@@ -264,7 +264,7 @@
     }
     .btnGhost:hover{ background: rgba(255,255,255,0.75); transform: translateY(-1px); }
 
-    .rightCardTitle{ font-weight: 800; margin: 0 0 10px; }
+    .rightCardTitle{ font-weight: 800; margin: 0; }
     .list{ margin: 0; padding-left: 18px; color: rgba(0,0,0,0.78); }
     .list li{ margin: 6px 0; }
 
@@ -392,6 +392,62 @@
       background: rgba(47,107,79,0.12);
     }
 
+    /* PRETTIER "What we provide" (professional) */
+    .provideHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .badge{
+      font-size: 12px;
+      font-weight: 900;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--green2));
+      box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+    }
+    .provideSub{
+      margin: 0 0 14px;
+      color: rgba(0,0,0,0.68);
+      font-size: 14px;
+    }
+    .provideGrid{
+      display:grid;
+      gap: 10px;
+    }
+    .provideItem{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.55);
+    }
+    .provideIcon{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(135deg, rgba(43,179,163,0.20), rgba(108,76,255,0.18));
+      border: 1px solid rgba(0,0,0,0.08);
+      flex: 0 0 auto;
+    }
+    .provideTitle{
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+    .provideText{
+      font-size: 13px;
+      color: rgba(0,0,0,0.70);
+      line-height: 1.35;
+    }
+
     /* Modal (Login/Signup) */
     .modalOverlay{
       position: fixed;
@@ -466,7 +522,7 @@
 
 <body>
 
-  <!-- NEW: Contact bar + language switch -->
+  <!-- Contact bar + language switch -->
   <div class="contactBar">
     <div class="container">
       <div class="contactBarInner">
@@ -516,7 +572,6 @@
           <a class="social" href="https://instagram.com/CorkRehab" target="_blank" rel="noopener">IG</a>
           <a class="social" href="https://linkedin.com/company/CorkRehab" target="_blank" rel="noopener">in</a>
 
-          <!-- NEW: login / signup -->
           <a class="social" href="#" id="openLogin">Login</a>
           <a class="social" href="#" id="openSignup">Sign up</a>
         </nav>
@@ -532,7 +587,6 @@
         <div class="heroCard">
           <h1 data-i18n="heroTitle">Rehabilitation tools made with cork—warm, safe, and sustainable.</h1>
 
-          <!-- UPDATED: clearer, more detailed description -->
           <p class="sub" data-i18n="heroSub">
             Premium cork-coated rehabilitation tools for physiotherapy clinics and healthcare centers.
             Softer grip, warmer touch, and a cleaner patient experience—without sacrificing durability or performance.
@@ -551,15 +605,44 @@
           </div>
         </div>
 
+        <!-- UPDATED: PRETTIER "WHAT WE PROVIDE" -->
         <div class="heroCard">
-          <p class="rightCardTitle">What we provide (B2B)</p>
-          <ul class="list">
-            <li>Cork-coated rehab equipment (strong core + cork comfort layer)</li>
-            <li>Fully cork items where feasible (after mechanical testing)</li>
-            <li>Training, onboarding, and after-sales support</li>
-          </ul>
+          <div class="provideHeader">
+            <p class="rightCardTitle">What we provide</p>
+            <span class="badge">B2B</span>
+          </div>
 
-          <div class="miniGrid">
+          <p class="provideSub">
+            Clinic-ready cork solutions designed for comfort, hygiene, and long-term durability.
+          </p>
+
+          <div class="provideGrid">
+            <div class="provideItem">
+              <div class="provideIcon">🧩</div>
+              <div>
+                <div class="provideTitle">Cork-coated rehab equipment</div>
+                <div class="provideText">Strong inner core + cork comfort layer for better grip and patient feel.</div>
+              </div>
+            </div>
+
+            <div class="provideItem">
+              <div class="provideIcon">🧪</div>
+              <div>
+                <div class="provideTitle">Pilot program & testing</div>
+                <div class="provideText">4–8 week pilots, feedback loops, and clear material performance targets.</div>
+              </div>
+            </div>
+
+            <div class="provideItem">
+              <div class="provideIcon">🤝</div>
+              <div>
+                <div class="provideTitle">Training & after-sales support</div>
+                <div class="provideText">Onboarding, usage guidance, and ongoing support for your staff.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="miniGrid" style="margin-top:14px;">
             <div class="mini">Comfort-first design</div>
             <div class="mini">Sustainable materials</div>
             <div class="mini">Hygiene-focused</div>
@@ -741,7 +824,7 @@
     closeModal?.addEventListener("click", () => overlay.style.display = "none");
     overlay?.addEventListener("click", (e) => { if(e.target === overlay) overlay.style.display = "none"; });
 
-    // translations (core text + new bar + modal)
+    // translations (core text + bar + modal)
     const translations = {
       en: {
         languageLabel: "Language",
